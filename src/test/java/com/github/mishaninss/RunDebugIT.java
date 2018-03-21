@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/steps",
+        glue = "com.github.mishaninss.steps",
         strict = true,
         plugin = {
 
