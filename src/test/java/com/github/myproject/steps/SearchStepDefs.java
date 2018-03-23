@@ -19,9 +19,12 @@ package com.github.myproject.steps;
 import com.github.mishaninss.html.containers.annotations.Container;
 import com.github.myproject.pages.MainPage;
 import com.github.myproject.pages.SearchForm;
+import com.github.myproject.pages.SearchResult;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 
 import java.util.Map;
 
@@ -31,6 +34,8 @@ public class SearchStepDefs extends BaseStepDefs{
     private MainPage mainPage;
     @Container
     private SearchForm searchForm;
+    @Container
+    private SearchResult searchResult;
 
     @Given("^I'm on the Main page$")
     public void iMOnTheMainPage(){
@@ -70,5 +75,15 @@ public class SearchStepDefs extends BaseStepDefs{
     @When("^I fill the Search Form with values:$")
     public void iFillTheSearchFormWithValues(Map<String, String> inputData) throws Throwable {
         searchForm.changeValues(inputData);
+    }
+
+    @Then("^I see (\\d+) hotel description blocs on the Search Results page$")
+    public void iSeeHotelDescriptionBlocsOnTheSearchResultsPage(int value) throws Throwable {
+        Assert.assertEquals("Incorrect search results count", value, searchResult.count());
+    }
+
+    @And("^Hotel Name value of the (\\d+) search result contains \"([^\"]*)\"$")
+    public void hotelNameValueOfTheSearchResultContains(int index, String value) throws Throwable {
+        Assert.assertEquals("Unexpected hotel name", value, searchResult.index(index).hotelName.readValue());
     }
 }
