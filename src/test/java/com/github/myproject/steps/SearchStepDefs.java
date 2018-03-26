@@ -17,14 +17,20 @@
 package com.github.myproject.steps;
 
 import com.github.mishaninss.html.containers.annotations.Container;
+import com.github.mishaninss.reporting.IReporter;
+import com.github.mishaninss.uidriver.Arma;
 import com.github.myproject.pages.MainPage;
 import com.github.myproject.pages.SearchForm;
 import com.github.myproject.pages.SearchResult;
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.qameta.allure.Step;
 import org.junit.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -36,6 +42,10 @@ public class SearchStepDefs extends BaseStepDefs{
     private SearchForm searchForm;
     @Container
     private SearchResult searchResult;
+    @Autowired
+    private Arma arma;
+    @Autowired
+    private IReporter reporter;
 
     @Given("^I'm on the Main page$")
     public void iMOnTheMainPage(){
@@ -45,6 +55,12 @@ public class SearchStepDefs extends BaseStepDefs{
     @When("^I enter \"([^\"]*)\" into Search text box on the Search Form$")
     public void iEnterIntoSearchTextBoxOnTheSearchForm(String value) throws Throwable {
         searchForm.search.changeValue(value);
+        step("my inner step");
+    }
+
+    @Step("${message}")
+    public void step(String message){
+
     }
 
     @And("^I select \"([^\"]*)\" in the Group Adults select on the Search Form$")
@@ -85,5 +101,12 @@ public class SearchStepDefs extends BaseStepDefs{
     @And("^Hotel Name value of the (\\d+) search result contains \"([^\"]*)\"$")
     public void hotelNameValueOfTheSearchResultContains(int index, String value) throws Throwable {
         Assert.assertEquals("Unexpected hotel name", value, searchResult.index(index).hotelName.readValue());
+    }
+
+    @After
+    public void addFailureInfo(Scenario scenario) {
+        if (scenario.isFailed() && arma.browser().isBrowserStarted()) {
+            reporter.attachScreenshot(arma.page().takeScreenshot());
+        }
     }
 }

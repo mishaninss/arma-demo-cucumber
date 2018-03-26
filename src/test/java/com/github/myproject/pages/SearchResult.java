@@ -27,7 +27,7 @@ public class SearchResult extends IndexedContainer<SearchResult>{
     @Element(".//img[@class='hotel_image']")
     public Image hotelImage;
 
-    @Element(".//span[@class='sr-hotel__name']")
+    @Element(".//span[contains(@class,'sr-hotel__name')]")
     public Link hotelName;
 
     @Element(".//div[@class='hotel_desc']")
