@@ -189,6 +189,7 @@
                     <systemPropertyVariables>
                         <logback.configurationFile>${project.build.directory}/test-classes/logback.xml</logback.configurationFile>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <spring.profiles.active>chrome</spring.profiles.active>
                     </systemPropertyVariables>
                     <argLine>
                         -Dcucumber.options="--plugin io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm"
