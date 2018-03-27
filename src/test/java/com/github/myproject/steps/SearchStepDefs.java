@@ -28,7 +28,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,12 +54,6 @@ public class SearchStepDefs extends BaseStepDefs{
     @When("^I enter \"([^\"]*)\" into Search text box on the Search Form$")
     public void iEnterIntoSearchTextBoxOnTheSearchForm(String value) throws Throwable {
         searchForm.search.changeValue(value);
-        step("my inner step");
-    }
-
-    @Step("${message}")
-    public void step(String message){
-
     }
 
     @And("^I select \"([^\"]*)\" in the Group Adults select on the Search Form$")
