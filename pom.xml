@@ -25,6 +25,11 @@
     <properties>
         <aspectj.version>1.8.13</aspectj.version>
         <failsafe.version>2.21.0</failsafe.version>
+        <junit.threadCount>10</junit.threadCount>
+        <junit.parallel></junit.parallel>
+        <cucumber.tags></cucumber.tags>
+        <retry.count>1</retry.count>
+        <run.classes>**/*IT.class</run.classes>
     </properties>
 
     <dependencies>
@@ -79,11 +84,6 @@
             <version>5.0.4.RELEASE</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>5.0.4.RELEASE</version>
-        </dependency>
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -97,6 +97,37 @@
             </exclusions>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>runmode_debug</id>
+            <properties>
+                <run.classes>**/RunDebugIT.class</run.classes>
+                <junit.threadCount>1</junit.threadCount>
+                <retry.count>0</retry.count>
+                <debug.mode>true</debug.mode>
+                <log.level>DEBUG</log.level>
+                <cucumber.tags>@Nothing</cucumber.tags>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>runmode_parallel</id>
+            <properties>
+                <run.classes>**/*ParallelIT.class</run.classes>
+                <junit.threadCount>10</junit.threadCount>
+                <junit.parallel>classes</junit.parallel>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>runmode_serial</id>
+            <properties>
+                <run.classes>**/*ParallelIT.class</run.classes>
+                <junit.threadCount>1</junit.threadCount>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -167,31 +198,70 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>com.github.temyers</groupId>
+                <artifactId>cucumber-jvm-parallel-plugin</artifactId>
+                <version>4.2.0</version>
+                <executions>
+                    <execution>
+                        <id>generateRunners</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>generateRunners</goal>
+                        </goals>
+                        <configuration>
+                            <glue>
+                                <package>com.github.myproject</package>
+                            </glue>
+                            <outputDirectory>${project.build.directory}/generated-test-sources/cucumber</outputDirectory>
+                            <featuresDirectory>src/test/resources/steps</featuresDirectory>
+                            <cucumberOutputDir>${project.build.directory}/cucumber-parallel</cucumberOutputDir>
+                            <format>json</format>
+                            <strict>true</strict>
+                            <monochrome>false</monochrome>
+                            <plugins>
+                                <plugin>
+                                    <name>io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm</name>
+                                    <noOutput>true</noOutput>
+                                </plugin>
+                            </plugins>
+                            <tags>${cucumber.tags}</tags>
+                            <useTestNG>false</useTestNG>
+                            <namingScheme>pattern</namingScheme>
+                            <namingPattern>Suite_{f}_{c}_ParallelIT</namingPattern>
+                            <parallelScheme>SCENARIO</parallelScheme>
+                            <customVmTemplate>src/test/resources/runner_class_template.vm</customVmTemplate>
+                            <packageName/>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${failsafe.version}</version>
                 <configuration>
-                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
+                    <rerunFailingTestsCount>${retry.count}</rerunFailingTestsCount>
                     <runOrder>alphabetical</runOrder>
-                    <forkCount>1</forkCount>
+                    <forkCount>0</forkCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
                     <useUnlimitedThreads>false</useUnlimitedThreads>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <parallel>${junit.parallel}</parallel>
+                    <threadCount>${junit.threadCount}</threadCount>
+                    <perCoreThreadCount>false</perCoreThreadCount>
                     <disableXmlReport>true</disableXmlReport>
                     <useFile>false</useFile>
                     <printSummary>false</printSummary>
-                    <useSystemClassLoader>false</useSystemClassLoader>
                     <includes>
-                        <include>**/*IT.class</include>
+                        <include>${run.classes}</include>
                     </includes>
                     <systemPropertyVariables>
                         <logback.configurationFile>${project.build.directory}/test-classes/logback.xml</logback.configurationFile>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                         <spring.profiles.active>chrome</spring.profiles.active>
+                        <org.apache.commons.logging.Log>org.apache.commons.logging.impl.NoOpLog</org.apache.commons.logging.Log>
                     </systemPropertyVariables>
-                    <argLine>
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm"
-                    </argLine>
                 </configuration>
                 <executions>
                     <execution>

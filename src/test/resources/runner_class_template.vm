@@ -1,0 +1,37 @@
+#parse("/array.java.vm")
+#if ($packageName)package $packageName;
+
+#end##
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.commons.io.FilenameUtils;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        strict = $strict,
+        features = {"$featureFile"},
+        plugin = #stringArray($plugins),
+        monochrome = $monochrome,
+#if(!$featureFile.contains(".feature:") && $tags)
+        tags = #stringArray($tags),
+#end
+        glue = #stringArray($glue))
+public class $className {
+    private static final String SUITE_NAME = FilenameUtils.getBaseName("$featureFile");
+    private static final Logger LOGGER = LoggerFactory.getLogger(${className}.class);
+
+    @AfterClass
+    public static void tearDown(){
+        LOGGER.info("FINISH SUITE " + SUITE_NAME + " *****************************************");
+    }
+
+    @BeforeClass
+        public static void setup(){
+            LOGGER.info("START SUITE " + SUITE_NAME + " *****************************************");
+        }
+}
