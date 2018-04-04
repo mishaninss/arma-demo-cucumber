@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
         plugin = {
 
         }
+        ,tags = {"@Debug"}
 )
 public class RunDebugIT {
 

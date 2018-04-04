@@ -30,14 +30,12 @@
         <cucumber.tags></cucumber.tags>
         <retry.count>1</retry.count>
         <run.classes>**/*IT.class</run.classes>
+        <active.profiles></active.profiles>
+        <base.config></base.config>
+        <config.file></config.file>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.mishaninss</groupId>
-            <artifactId>arma-ui-webdriver</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>com.github.mishaninss</groupId>
             <artifactId>arma-allure-logback-logger</artifactId>
@@ -99,6 +97,37 @@
     </dependencies>
 
     <profiles>
+        <profile>
+            <id>webdriver</id>
+            <properties>
+                <active.profiles>chrome</active.profiles>
+                <base.config>com.github.mishaninss.config.UiWdConfig</base.config>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.github.mishaninss</groupId>
+                    <artifactId>arma-ui-webdriver</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>appium</id>
+            <properties>
+                <active.profiles>tablet,safari</active.profiles>
+                <base.config>com.github.mishaninss.config.UiAppiumConfig</base.config>
+                <config.file>arma_appium.properties</config.file>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.github.mishaninss</groupId>
+                    <artifactId>arma-ui-appium</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
         <profile>
             <id>runmode_debug</id>
             <properties>
@@ -259,8 +288,10 @@
                     <systemPropertyVariables>
                         <logback.configurationFile>${project.build.directory}/test-classes/logback.xml</logback.configurationFile>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-                        <spring.profiles.active>chrome</spring.profiles.active>
+                        <spring.profiles.active>${active.profiles}</spring.profiles.active>
                         <org.apache.commons.logging.Log>org.apache.commons.logging.impl.NoOpLog</org.apache.commons.logging.Log>
+                        <base.config>${base.config}</base.config>
+                        <arma.config.file>${config.file}</arma.config.file>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>

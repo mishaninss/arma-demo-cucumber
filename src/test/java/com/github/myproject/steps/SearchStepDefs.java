@@ -18,7 +18,9 @@ package com.github.myproject.steps;
 
 import com.github.mishaninss.html.containers.annotations.Container;
 import com.github.mishaninss.reporting.IReporter;
+import com.github.mishaninss.reporting.Reporter;
 import com.github.mishaninss.uidriver.Arma;
+import com.github.mishaninss.uidriver.interfaces.IWaitingDriver;
 import com.github.myproject.pages.MainPage;
 import com.github.myproject.pages.SearchForm;
 import com.github.myproject.pages.SearchResult;
@@ -43,7 +45,7 @@ public class SearchStepDefs extends BaseStepDefs{
     private SearchResult searchResult;
     @Autowired
     private Arma arma;
-    @Autowired
+    @Reporter
     private IReporter reporter;
 
     @Given("^I'm on the Main page$")
@@ -58,7 +60,7 @@ public class SearchStepDefs extends BaseStepDefs{
 
     @And("^I select \"([^\"]*)\" in the Group Adults select on the Search Form$")
     public void iSelectInTheGroupAdultsSelectOnTheSearchForm(String value) throws Throwable {
-        searchForm.groupAdults.changeValue(value);
+        searchForm.groupAdults.selectByValue(value);
     }
 
     @And("^I click Submit button on the Search Form$")
@@ -68,7 +70,7 @@ public class SearchStepDefs extends BaseStepDefs{
 
     @And("^I check Business Purpose checkbox on the Search Form$")
     public void iCheckBusinessPurposeCheckboxOnTheSearchForm() throws Throwable {
-        searchForm.businessPurpose.changeValue(true);
+        searchForm.businessPurpose.select();
     }
 
     @When("^I change value of \"([^\"]*)\" element on the Search Form to \"([^\"]*)\"$")

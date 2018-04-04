@@ -11,8 +11,9 @@
     <logger name="ch.qos.logback" level="WARN"/>
     <logger name="io.github.bonigarcia" level="WARN"/>
     <logger name="org.apache.http" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

@@ -16,18 +16,24 @@
 
 package com.github.myproject.pages;
 
+import com.github.mishaninss.data.WebDriverProperties;
 import com.github.mishaninss.html.containers.ArmaContainer;
 import com.github.mishaninss.html.containers.annotations.Container;
+import com.github.mishaninss.html.containers.annotations.ContextualElement;
 import com.github.mishaninss.html.containers.annotations.Element;
 import com.github.mishaninss.html.elements.*;
+import com.github.mishaninss.html.elements.interfaces.ISelectable;
 
 @Container("id=frm")
 public class SearchForm extends ArmaContainer{
 
-    @Element("id=ss")
+    @ContextualElement({
+            @Element("id=ss"),
+            @Element(val = "tablet", locator = "id=destination")
+    })
     public TextBox search;
 
-    @Element("id=group_adults")
+    @Element("name=group_adults")
     public Select groupAdults;
 
     @Element("id=group_children")
@@ -36,8 +42,12 @@ public class SearchForm extends ArmaContainer{
     @Element("id=no_rooms")
     public Select noRooms;
 
+    @ContextualElement({
+            @Element(locator = "name=sb_travel_purpose", type = CheckBox.class),
+            @Element(val = "tablet", locator = "name=sb_travel_purpose", type = RadioButton.class)
+    })
     @Element("name=sb_travel_purpose")
-    public CheckBox businessPurpose;
+    public ISelectable businessPurpose;
 
     @Element("css=button[type='submit']")
     public Button submit;

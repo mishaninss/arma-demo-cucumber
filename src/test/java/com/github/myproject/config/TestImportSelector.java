@@ -16,20 +16,12 @@
 
 package com.github.myproject.config;
 
-import com.github.mishaninss.config.UiWdConfig;
-import com.github.mishaninss.reporting.AllureSlf4jReporter;
-import com.github.mishaninss.reporting.IReporter;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.ImportSelector;
+import org.springframework.core.type.AnnotationMetadata;
 
-@Configuration
-@Import(TestImportSelector.class)
-@ComponentScan("com.github.myproject")
-public class TestsConfig {
-
-    @Bean @Qualifier(IReporter.QUALIFIER)
-    public IReporter reporter(){
-        return new AllureSlf4jReporter();
+public class TestImportSelector implements ImportSelector {
+    @Override
+    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
+        return new String[] {System.getProperty("base.config", "UiWdConfig")};
     }
-
 }
