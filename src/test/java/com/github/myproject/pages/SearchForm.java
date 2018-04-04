@@ -16,7 +16,6 @@
 
 package com.github.myproject.pages;
 
-import com.github.mishaninss.data.WebDriverProperties;
 import com.github.mishaninss.html.containers.ArmaContainer;
 import com.github.mishaninss.html.containers.annotations.Container;
 import com.github.mishaninss.html.containers.annotations.ContextualElement;
@@ -46,7 +45,6 @@ public class SearchForm extends ArmaContainer{
             @Element(locator = "name=sb_travel_purpose", type = CheckBox.class),
             @Element(val = "tablet", locator = "name=sb_travel_purpose", type = RadioButton.class)
     })
-    @Element("name=sb_travel_purpose")
     public ISelectable businessPurpose;
 
     @Element("css=button[type='submit']")
