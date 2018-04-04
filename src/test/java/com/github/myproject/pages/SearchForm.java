@@ -23,31 +23,31 @@ import com.github.mishaninss.html.containers.annotations.Element;
 import com.github.mishaninss.html.elements.*;
 import com.github.mishaninss.html.elements.interfaces.ISelectable;
 
-@Container("id=frm")
+@Container(byId = "frm")
 public class SearchForm extends ArmaContainer{
 
     @ContextualElement({
-            @Element("id=ss"),
-            @Element(val = "tablet", locator = "id=destination")
+            @Element(byId = "ss"),
+            @Element(val = "tablet", byId = "destination")
     })
     public TextBox search;
 
-    @Element("name=group_adults")
+    @Element(byName = "group_adults")
     public Select groupAdults;
 
-    @Element("id=group_children")
+    @Element(byId = "group_children")
     public Select groupChildren;
 
-    @Element("id=no_rooms")
+    @Element(byId = "no_rooms")
     public Select noRooms;
 
     @ContextualElement({
-            @Element(locator = "name=sb_travel_purpose", type = CheckBox.class),
-            @Element(val = "tablet", locator = "name=sb_travel_purpose", type = RadioButton.class)
+            @Element(byName = "sb_travel_purpose", type = CheckBox.class),
+            @Element(val = "tablet", byName = "sb_travel_purpose", type = RadioButton.class)
     })
     public ISelectable businessPurpose;
 
-    @Element("css=button[type='submit']")
+    @Element(byCss = "button[type='submit']")
     public Button submit;
 
 }
