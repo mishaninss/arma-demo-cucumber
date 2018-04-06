@@ -1,0 +1,17 @@
+{
+  "caps": {
+    "goog:chromeOptions": {
+      "args": [
+        "disable-blink-features=BlockCredentialedSubresources",
+        "disable-infobars",
+        "start-maximized"
+      ],
+      "mobileEmulation": {
+        "deviceName": "iPad"
+      }
+    }
+  }
+}
+
+
+

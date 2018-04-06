@@ -33,6 +33,7 @@
         <active.profiles></active.profiles>
         <base.config></base.config>
         <config.file></config.file>
+        <chrome.capabilities.file></chrome.capabilities.file>
     </properties>
 
     <dependencies>
@@ -102,6 +103,22 @@
             <properties>
                 <active.profiles>chrome</active.profiles>
                 <base.config>com.github.mishaninss.config.UiWdConfig</base.config>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.github.mishaninss</groupId>
+                    <artifactId>arma-ui-webdriver</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>webdriver_tablet</id>
+            <properties>
+                <active.profiles>chrome,tablet</active.profiles>
+                <base.config>com.github.mishaninss.config.UiWdConfig</base.config>
+                <chrome.capabilities.file>/chrome_tablet_capabilities.json</chrome.capabilities.file>
             </properties>
             <dependencies>
                 <dependency>
@@ -292,6 +309,7 @@
                         <org.apache.commons.logging.Log>org.apache.commons.logging.impl.NoOpLog</org.apache.commons.logging.Log>
                         <base.config>${base.config}</base.config>
                         <arma.config.file>${config.file}</arma.config.file>
+                        <arma.driver.chrome.capabilities.file>${chrome.capabilities.file}</arma.driver.chrome.capabilities.file>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>

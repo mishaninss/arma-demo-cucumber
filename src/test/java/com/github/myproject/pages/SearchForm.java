@@ -16,12 +16,15 @@
 
 package com.github.myproject.pages;
 
+import com.github.mishaninss.html.composites.CompositeElement;
 import com.github.mishaninss.html.containers.ArmaContainer;
 import com.github.mishaninss.html.containers.annotations.Container;
 import com.github.mishaninss.html.containers.annotations.ContextualElement;
 import com.github.mishaninss.html.containers.annotations.Element;
 import com.github.mishaninss.html.elements.*;
 import com.github.mishaninss.html.elements.interfaces.ISelectable;
+import com.github.myproject.html.composites.Datepicker;
+import com.github.myproject.html.composites.MobileDatepicker;
 
 @Container(byId = "frm")
 public class SearchForm extends ArmaContainer{
@@ -31,6 +34,18 @@ public class SearchForm extends ArmaContainer{
             @Element(val = "tablet", byId = "destination")
     })
     public TextBox search;
+
+    @ContextualElement({
+            @Element(byClass = "--checkin-field", type = Datepicker.class),
+            @Element(val = "tablet", byId = "homein", type = MobileDatepicker.class)
+    })
+    public CompositeElement checkinDate;
+
+    @ContextualElement({
+            @Element(byClass = "--checkout-field", type = Datepicker.class),
+            @Element(val = "tablet", byId = "homeout", type = MobileDatepicker.class)
+    })
+    public CompositeElement checkoutDate;
 
     @Element(byName = "group_adults")
     public Select groupAdults;
@@ -43,7 +58,7 @@ public class SearchForm extends ArmaContainer{
 
     @ContextualElement({
             @Element(byName = "sb_travel_purpose", type = CheckBox.class),
-            @Element(val = "tablet", byName = "sb_travel_purpose", type = RadioButton.class)
+            @Element(val = "tablet", byCss = "input[name='sb_travel_purpose'][value='business']", type = RadioButton.class)
     })
     public ISelectable businessPurpose;
 
