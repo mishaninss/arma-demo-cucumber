@@ -116,7 +116,7 @@
         <profile>
             <id>webdriver_tablet</id>
             <properties>
-                <active.profiles>chrome,tablet</active.profiles>
+                <active.profiles>chrome, tablet</active.profiles>
                 <base.config>com.github.mishaninss.config.UiWdConfig</base.config>
                 <chrome.capabilities.file>/chrome_tablet_capabilities.json</chrome.capabilities.file>
             </properties>

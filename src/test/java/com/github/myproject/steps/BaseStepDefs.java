@@ -16,6 +16,9 @@
 
 package com.github.myproject.steps;
 
+import com.github.mishaninss.reporting.IReporter;
+import com.github.mishaninss.reporting.Reporter;
+import com.github.mishaninss.uidriver.Arma;
 import com.github.myproject.config.TestsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -32,5 +35,9 @@ public class BaseStepDefs {
 
     @Autowired
     protected ApplicationContext applicationContext;
+    @Autowired
+    protected Arma arma;
+    @Reporter
+    protected IReporter reporter;
 
 }

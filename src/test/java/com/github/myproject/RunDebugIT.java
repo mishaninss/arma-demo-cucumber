@@ -29,9 +29,7 @@ import org.slf4j.LoggerFactory;
         features = "src/test/resources/steps",
         glue = "com.github.myproject.steps",
         strict = true,
-        plugin = {
-
-        }
+        plugin = {"io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm"}
         ,tags = {"@Debug"}
 )
 public class RunDebugIT {

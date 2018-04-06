@@ -45,10 +45,6 @@ public class SearchStepDefs extends BaseStepDefs{
     private SearchForm searchForm;
     @Container
     private SearchResult searchResult;
-    @Autowired
-    private Arma arma;
-    @Reporter
-    private IReporter reporter;
 
     @Given("^I'm on the Main page$")
     public void iMOnTheMainPage(){
