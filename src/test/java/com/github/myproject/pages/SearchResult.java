@@ -18,16 +18,24 @@ package com.github.myproject.pages;
 
 import com.github.mishaninss.html.containers.IndexedContainer;
 import com.github.mishaninss.html.containers.annotations.Container;
+import com.github.mishaninss.html.containers.annotations.ContextualContainer;
+import com.github.mishaninss.html.containers.annotations.ContextualElement;
 import com.github.mishaninss.html.containers.annotations.Element;
 import com.github.mishaninss.html.elements.*;
 
-@Container("//div[@data-hotelid]")
+@ContextualContainer({
+        @Container("//div[@data-hotelid]"),
+        @Container(byClass = "hotel-newlist__wrapper", val = "tablet")
+})
 public class SearchResult extends IndexedContainer<SearchResult>{
 
     @Element(".//img[@class='hotel_image']")
     public Image hotelImage;
 
-    @Element(".//span[contains(@class,'sr-hotel__name')]")
+    @ContextualElement({
+            @Element(".//span[contains(@class,'sr-hotel__name')]"),
+            @Element(byXpath = ".//div[contains(@class, 'card_body')]//a[contains(@class, 'hotel_name_link')]", val = "tablet")
+    })
     public Link hotelName;
 
     @Element(".//div[@class='hotel_desc']")

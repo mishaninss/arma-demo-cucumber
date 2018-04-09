@@ -307,7 +307,7 @@
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                         <spring.profiles.active>${active.profiles}</spring.profiles.active>
                         <org.apache.commons.logging.Log>org.apache.commons.logging.impl.NoOpLog</org.apache.commons.logging.Log>
-                        <base.config>${base.config}</base.config>
+                        <arma.base.config>${base.config}</arma.base.config>
                         <arma.config.file>${config.file}</arma.config.file>
                         <arma.driver.chrome.capabilities.file>${chrome.capabilities.file}</arma.driver.chrome.capabilities.file>
                     </systemPropertyVariables>

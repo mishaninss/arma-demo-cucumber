@@ -17,14 +17,9 @@
 package com.github.myproject.steps;
 
 import com.github.mishaninss.html.containers.annotations.Container;
-import com.github.mishaninss.reporting.IReporter;
-import com.github.mishaninss.reporting.Reporter;
-import com.github.mishaninss.uidriver.Arma;
-import com.github.mishaninss.uidriver.interfaces.IWaitingDriver;
 import com.github.myproject.pages.MainPage;
 import com.github.myproject.pages.SearchForm;
 import com.github.myproject.pages.SearchResult;
-import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
@@ -32,8 +27,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.Keys;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -53,8 +46,7 @@ public class SearchStepDefs extends BaseStepDefs{
 
     @When("^I enter \"([^\"]*)\" into Search text box on the Search Form$")
     public void iEnterIntoSearchTextBoxOnTheSearchForm(String value) throws Throwable {
-        searchForm.search.perform().click().sendKeys(Keys.ESCAPE);
-        searchForm.search.changeValue(value);
+        searchForm.search.perform().setValue(value);
     }
 
     @And("^I select \"([^\"]*)\" in the Group Adults select on the Search Form$")

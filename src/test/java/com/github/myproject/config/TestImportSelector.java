@@ -16,12 +16,13 @@
 
 package com.github.myproject.config;
 
+import com.github.mishaninss.data.UiCommonsProperties;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
 public class TestImportSelector implements ImportSelector {
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-        return new String[] {System.getProperty("base.config", "UiWdConfig")};
+        return new String[] {System.getProperty(UiCommonsProperties.Framework.BASE_CONFIG, "com.github.mishaninss.config.UiWdConfig")};
     }
 }
