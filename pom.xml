@@ -310,6 +310,7 @@
                         <arma.base.config>${base.config}</arma.base.config>
                         <arma.config.file>${config.file}</arma.config.file>
                         <arma.driver.chrome.capabilities.file>${chrome.capabilities.file}</arma.driver.chrome.capabilities.file>
+                        <arma.framework.stacktrace.whitelist>com.github.myproject</arma.framework.stacktrace.whitelist>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>

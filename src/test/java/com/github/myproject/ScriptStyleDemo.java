@@ -26,7 +26,7 @@ public class ScriptStyleDemo {
             .reporter(AllureSlf4jReporter.class)
             .build();
         Arma arma = Arma.chrome();
-        arma.config().framework().enableForcedClosing();
+        arma.config().framework().enableForcedClosing().addPackageToStacktraceWhiteList("com.github.myproject");
         arma.page().goToUrl("/");
         arma.by().id("ss").perform().setValue("Blue Sea Beach Resort");
         arma.by().css("button[type='submit']").perform().click();

@@ -18,7 +18,7 @@ package com.github.myproject.config;
 
 import com.github.mishaninss.reporting.AllureSlf4jReporter;
 import com.github.mishaninss.reporting.IReporter;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.github.mishaninss.reporting.Reporter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Import;
 @ComponentScan("com.github.myproject")
 public class TestsConfig {
 
-    @Bean @Qualifier(IReporter.QUALIFIER)
+    @Bean(IReporter.QUALIFIER) @Reporter
     public IReporter reporter(){
         return new AllureSlf4jReporter();
     }

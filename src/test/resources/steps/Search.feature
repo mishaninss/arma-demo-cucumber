@@ -1,9 +1,9 @@
-
+@Debug
 Feature: Search
 
   Background: open main page
     Given I'm on the Main page
-  @Debug
+
   Scenario: Simple steps example
     When I select "6 June 2018" in the Check-in Date field on the Search Form
     When I select "18 June 2018" in the Check-out Date field on the Search Form
