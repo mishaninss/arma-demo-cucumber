@@ -12,3 +12,4 @@ Feature: Checkout
     Then I'm on the Main page
     And Hotel Name value of the 1 search result contains "Blue See Beach Resort"
     When I'm on the Main page
+        When I'm on the Main page
