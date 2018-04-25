@@ -105,4 +105,14 @@ public class SearchStepDefs extends BaseStepDefs{
     public void iSelectInTheCheckOutDateFieldOnTheSearchForm(String value) throws Throwable {
         searchForm.checkoutDate.changeValue(value);
     }
+
+    @When("^I change value of \"(.+)\" element on the \"(.+)\" to \"(.*)\"$")
+    public void iChangeValueOfElementOnTheTo(String elementId, String pageName, String value) throws Throwable {
+        arma.page(pageName).changeValue(elementId, value);
+    }
+
+    @And("^I click on \"(.*)\" element on the \"(.+)\"$")
+    public void iClickOnElementOnThePage(String elementId, String pageName) throws Throwable {
+        arma.page(pageName).performAction(elementId);
+    }
 }

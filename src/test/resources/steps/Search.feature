@@ -1,4 +1,3 @@
-@Debug
 Feature: Search
 
   Background: open main page
@@ -19,6 +18,13 @@ Feature: Search
     And I change value of "group adults" element on the Search Form to "1 adult"
     And I change value of "business purpose" element on the Search Form to "true"
     And I click on "submit" element on the Search Form
+
+    @Debug
+  Scenario: Very abstract steps example
+    When I change value of "search" element on the "  sEarcH   form  " to "Blue See Beach Resort"
+    And I change value of "group adults" element on the "Search Form" to "1 adult"
+    And I change value of "business purpose" element on the "Search Form" to "true"
+    And I click on "submit" element on the "Search Form"
 
   Scenario: Batch steps example
     When I fill the Search Form with values:
