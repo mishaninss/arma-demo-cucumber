@@ -20,15 +20,21 @@ import com.github.mishaninss.reporting.AllureSlf4jReporter;
 import com.github.mishaninss.uidriver.Arma;
 
 public class ScriptStyleDemo {
-    public static void main(String[] args){
+    public static Arma setup(){
         Arma.using()
-            .componentsLocations("com.github.myproject")
-            .reporter(AllureSlf4jReporter.class)
-            .build();
+                .componentsLocations("com.github.myproject")
+                .reporter(AllureSlf4jReporter.class)
+                .build();
         Arma arma = Arma.chrome();
         arma.config().framework().enableForcedClosing().addPackageToStacktraceWhiteList("com.github.myproject");
+        return arma;
+    }
+
+    public static void main(String[] args){
+        Arma arma = setup();
+
         arma.page().goToUrl("/");
-        arma.by().id("ss").perform().setValue("Blue Sea Beach Resort");
-        arma.by().css("button[type='submit']").perform().click();
+        arma.elementBy().id("ss").perform().setValue("Blue Sea Beach Resort");
+        arma.elementBy().css("button[type='submit']").perform().click();
     }
 }
