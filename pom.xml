@@ -23,7 +23,7 @@
     </repositories>
 
     <properties>
-        <aspectj.version>1.8.13</aspectj.version>
+        <aspectj.version>1.9.1</aspectj.version>
         <failsafe.version>2.21.0</failsafe.version>
         <junit.threadCount>10</junit.threadCount>
         <junit.parallel></junit.parallel>
