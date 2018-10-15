@@ -44,6 +44,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.mishaninss</groupId>
+            <artifactId>arma-ui-assertions</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
