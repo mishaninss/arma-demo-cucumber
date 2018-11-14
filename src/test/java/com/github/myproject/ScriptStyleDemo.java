@@ -16,6 +16,8 @@
 
 package com.github.myproject;
 
+import com.github.mishaninss.assertions.ArmaAssertions;
+import com.github.mishaninss.html.elements.ArmaElement;
 import com.github.mishaninss.reporting.AllureSlf4jReporter;
 import com.github.mishaninss.uidriver.Arma;
 
@@ -34,6 +36,14 @@ public class ScriptStyleDemo {
         Arma arma = setup();
 
         arma.page().goToUrl("/");
+        ArmaElement element = arma.elementBy().id("ss3");
+//        element.perform().setValue("Blue Sea Beach Resort");
+        ArmaAssertions.assertThat(element)
+                .isDisplayed(false);
+
+        arma.elementBy().css("button[type='submit']").perform().click();
+
+
         arma.elementBy().id("ss").perform().setValue("Blue Sea Beach Resort");
         arma.elementBy().css("button[type='submit']").perform().click();
     }
